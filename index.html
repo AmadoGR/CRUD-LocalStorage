@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 LocalStorage</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css"> <!-- Enlace a una hoja de estilos de Bootstrap -->
+    <link rel="stylesheet" href="css/users.css"> <!-- Referenciamos los estilos CSS -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!-- Incluimos la biblioteca Vue.js de Vue 3-->
+
+</head>
+<body>
+
+    <!-- Se crea la barra de navegación -->
+    <header style="font-size: medium; text-align: center;">
+        <h1 >CRUD LocalStorage</h1>
+    </header>
+    <div id="app" class="container py-4">
+        <div class="row">
+            <div class="col-md-3">
+                <h2 style="text-align: center;">Usuarios</h2>
+                <div class="card card-body">
+                    <form ref="userForm" v-on:submit="processUser">
+                        <div class="form-group">
+                            <input type="text" ref="name" v-model="user.name" class="form-control" placeholder="Nombre"
+                                minlength="10" maxlength="50" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" v-model="user.username" class="form-control" placeholder="Usuario"
+                                minlength="6" maxlength="20" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" v-model="user.email" class="form-control" placeholder="Correo"
+                                minlength="10" maxlength="50" required />
+                        </div>
+                        <div class="form-group">  <!-- Botón de envío de formulario -->
+                            <input type="submit" class="btn btn-success btn-block text-dark" v-bind:value="operation">
+                        </div>
+                        <div class="form-group"><!-- Botón para limpiar dl formulario -->
+                            <input type="reset" class="btn btn-primary btn-block" value="Limpiar">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h1 style="text-align: center;">Lista de Usuarios</h1>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Nombre</th>
+                                <th>Usuario</th>
+                                <th>Correo</th>
+                                <th colspan="2">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(user, index) in users">
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td><button @click="editUser(user.id)" class="btn btn-info btn-block">Actualizar</button>
+                                </td>
+                                <td><button @click="deleteUser(user.id, $event)"
+                                        class="btn btn-danger btn-block">Eliminar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" 
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+    crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" 
+    crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" 
+    integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" 
+    crossorigin="anonymous"></script>
+
+    <script src="js/users.js"></script>
+</body>
+</html>
